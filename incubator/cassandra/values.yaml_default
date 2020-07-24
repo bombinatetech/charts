@@ -1,8 +1,8 @@
 ## Cassandra image version
 ## ref: https://hub.docker.com/r/library/cassandra/
 image:
-  repo: 459710339434.dkr.ecr.ap-south-1.amazonaws.com/cassandra-prod
-  tag: latest
+  repo: cassandra
+  tag: 3.11.6
   pullPolicy: IfNotPresent
   ## Specify ImagePullSecrets for Pods
   ## ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
@@ -13,7 +13,7 @@ image:
 service:
   type: ClusterIP
   annotations: ""
-  external: true
+
 ## Use an alternate scheduler, e.g. "stork".
 ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
 ##
@@ -41,7 +41,7 @@ persistence:
 resources: 
    requests:
      memory: 8Gi
-     cpu: 1
+     cpu: 2
    limits:
      memory: 10Gi
      cpu: 2
@@ -61,7 +61,7 @@ config:
   # you need to set endpoint_snitch to GossipingPropertyFileSnitch.
   # Otherwise, these values are ignored and datacenter1 and rack1
   # are used.
-  dc_name: datacenter1
+  dc_name: DC1
   rack_name: RAC1
   endpoint_snitch: SimpleSnitch
   max_heap_size: 8192M
@@ -196,11 +196,11 @@ backup:
 
   resources:
     requests:
-      memory: 1Gi
+      memory: 2Gi
       cpu: 1
     limits:
       memory: 2Gi
-      cpu: 2
+      cpu: 1
 
   # Name of the secret containing the credentials of the service account used by GOOGLE_APPLICATION_CREDENTIALS, as a credentials.json file
   # google:
@@ -215,9 +215,9 @@ backup:
 ## Cassandra exported configuration
 ## ref: https://github.com/criteo/cassandra_exporter
 exporter:
-  enabled: true
+  enabled: false
   serviceMonitor:
-    enabled: true
+    enabled: false
     additionalLabels: 
       prometheus: default
   image:

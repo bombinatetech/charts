@@ -13,7 +13,7 @@ image:
 service:
   type: ClusterIP
   annotations: ""
-  external: true
+  external: false
 ## Use an alternate scheduler, e.g. "stork".
 ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
 ##
@@ -29,9 +29,9 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: "io1"
+  storageClass: "gp2"
   accessMode: ReadWriteOnce
-  size: 20Gi
+  size: 5Gi
 
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -40,11 +40,11 @@ persistence:
 ## ref: http://docs.datastax.com/en/archived/cassandra/2.0/cassandra/architecture/architecturePlanningHardware_c.html
 resources: 
    requests:
-     memory: 8Gi
-     cpu: 1
+     memory: 2Gi
+     cpu: 0.5
    limits:
-     memory: 10Gi
-     cpu: 2
+     memory: 4Gi
+     cpu: 1
 
 ## Change cassandra configuration parameters below:
 ## ref: http://docs.datastax.com/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html
@@ -53,9 +53,9 @@ resources:
 ## ref: http://docs.datastax.com/en/cassandra/3.0/cassandra/operations/opsTuneJVM.html
 config:
   cluster_domain: cluster.local
-  cluster_name: cassandra
-  cluster_size: 5
-  seed_size: 3
+  cluster_name: cassandra-dev
+  cluster_size: 3
+  seed_size: 2
   num_tokens: 512
   # If you want Cassandra to use this datacenter and rack name,
   # you need to set endpoint_snitch to GossipingPropertyFileSnitch.
@@ -64,8 +64,8 @@ config:
   dc_name: datacenter1
   rack_name: RAC1
   endpoint_snitch: SimpleSnitch
-  max_heap_size: 8192M
-  heap_new_size: 6144M
+  max_heap_size: 3036M
+  heap_new_size: 2048M
   start_rpc: false
   ports:
     cql: 9042
@@ -215,9 +215,9 @@ backup:
 ## Cassandra exported configuration
 ## ref: https://github.com/criteo/cassandra_exporter
 exporter:
-  enabled: true
+  enabled: false
   serviceMonitor:
-    enabled: true
+    enabled: false
     additionalLabels: 
       prometheus: default
   image:
