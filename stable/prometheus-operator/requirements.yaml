@@ -11,6 +11,6 @@ dependencies:
     condition: nodeExporter.enabled
 
   - name: grafana
-    version: "5.3.*"
+    version: "5.4.*"
     repository: file://../grafana/
     condition: grafana.enabled

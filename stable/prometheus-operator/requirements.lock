@@ -7,6 +7,6 @@ dependencies:
   version: 1.10.0
 - name: grafana
   repository: file://../grafana/
-  version: 5.3.5
-digest: sha256:d9cc2756d1cf939ad8e05d9bcd50d493f3009a08c9e09179129b784053ca0045
-generated: "2020-07-20T11:21:11.907452255Z"
+  version: 5.4.1
+digest: sha256:94bcd6f76fedb7d0ff2e563e7ae8650e13e4bf213a2e10070008f40c74b884e0
+generated: "2020-07-27T13:44:22.568687604Z"
