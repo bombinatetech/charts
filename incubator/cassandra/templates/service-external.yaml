@@ -10,7 +10,7 @@ metadata:
     chart: {{ template "cassandra.chart" . }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
-  name: {{ template "cassandra.fullname" . }}
+  name: {{ template "cassandra.fullname" . }}-external
   namespace: {{ .Release.Namespace }}
   selfLink: /api/v1/namespaces/cassandra/services/cassandra
 spec:
